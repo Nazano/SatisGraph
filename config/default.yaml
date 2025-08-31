@@ -1,0 +1,22 @@
+# Neo4j Configuration
+neo4j:
+  uri: "bolt://localhost:7687"
+  username: "neo4j"
+  password: "password"
+  database: "neo4j"
+
+# Data Sources
+data_sources:
+  satisfactory_community_resources: "https://github.com/ficsit-felix/satisfactory-community-resources/raw/main/GameData/fr.json"
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/satisgraph.log"
+
+# Processing Configuration
+processing:
+  batch_size: 1000
+  cache_enabled: true
+  cache_duration: 3600  # seconds
