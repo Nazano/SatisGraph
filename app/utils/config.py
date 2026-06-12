@@ -34,8 +34,8 @@ class AppConfig:
             "YOUTUBE_API_KEY", self._settings["youtube"].get("api_key", "")
         )
         self._settings.setdefault("llm", {})
-        self._settings["llm"]["api_key"] = os.environ.get(
-            "OPENAI_API_KEY", self._settings["llm"].get("api_key", "")
+        self._settings["llm"]["base_url"] = os.environ.get(
+            "OLLAMA_BASE_URL", self._settings["llm"].get("base_url", "http://localhost:11434")
         )
 
     # ------------------------------------------------------------------
@@ -63,12 +63,16 @@ class AppConfig:
         return bool(self._settings["llm"].get("enabled", False))
 
     @property
-    def llm_api_key(self) -> str:
-        return self._settings["llm"]["api_key"]
+    def llm_provider(self) -> str:
+        return self._settings["llm"].get("provider", "ollama")
+
+    @property
+    def llm_base_url(self) -> str:
+        return self._settings["llm"].get("base_url", "http://localhost:11434")
 
     @property
     def llm_model(self) -> str:
-        return self._settings["llm"].get("model", "gpt-4o-mini")
+        return self._settings["llm"].get("model", "llama3.2")
 
     @property
     def log_level(self) -> str:

@@ -11,8 +11,8 @@ pandas>=2.2.0
 # google-api-python-client>=2.130.0   # TODO: uncomment to enable real YouTube API calls
 # youtube-transcript-api>=0.6.2       # TODO: uncomment to enable real transcript fetching
 
-# LLM (optional)
-# openai>=1.30.0                       # TODO: uncomment + set OPENAI_API_KEY to enable LLM extraction
+# LLM – Ollama (local inference)
+ollama>=0.4.0                          # pip install ollama  (requires Ollama server running locally)
 
 # Dev / testing
 pytest>=8.0

@@ -15,10 +15,10 @@ youtube:
   published_after: "2026-01-01T00:00:00Z"  # Only fetch videos after this date
 
 llm:
-  enabled: false  # Enable LLM-based prediction extraction
-  provider: "openai"  # "openai" | "anthropic" | "local"
-  model: "gpt-4o-mini"
-  api_key: ""  # Set via OPENAI_API_KEY environment variable
+  enabled: true   # Enable LLM-based prediction extraction via Ollama
+  provider: "ollama"  # "ollama" | "openai" | "anthropic"
+  model: "llama3.2"
+  base_url: "http://localhost:11434"  # Set via OLLAMA_BASE_URL environment variable
   max_tokens: 2000
 
 ingestion:

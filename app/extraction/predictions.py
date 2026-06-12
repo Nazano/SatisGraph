@@ -2,13 +2,13 @@
 
 Hybrid approach:
   Layer 1 – Rule-based: regex patterns for scores, team names, confidence phrases.
-  Layer 2 – LLM (optional): structured extraction via OpenAI / local model.
-             Enabled via config.llm_enabled = true.
+  Layer 2 – LLM (optional): structured extraction via Ollama (local) or any compatible model.
+             Enabled via config.llm_enabled = true in settings.yml.
 
-TODO (LLM layer):
-  1. Set OPENAI_API_KEY env var and llm.enabled=true in settings.yml.
-  2. Implement _extract_llm() using the OpenAI client.
-  3. The prompt template is in _LLM_PROMPT below.
+To enable LLM extraction:
+  1. Install and start Ollama: https://ollama.com
+  2. Pull a model: ollama pull llama3.2
+  3. Set llm.enabled: true and llm.model in config/settings.yml (or set OLLAMA_BASE_URL env var).
 """
 
 from __future__ import annotations
@@ -104,7 +104,7 @@ def extract_predictions(
 
     Tries LLM extraction first (if enabled), then falls back to rule-based.
     """
-    if config.llm_enabled and config.llm_api_key:
+    if config.llm_enabled:
         try:
             return _extract_llm(transcript_text, video_id, channel_id)
         except Exception as exc:
@@ -321,22 +321,33 @@ def _find_sentence_with(text: str, keyword: str) -> str:
 # ---------------------------------------------------------------------------
 
 
-def _extract_llm(text: str, video_id: str, channel_id: str) -> Prediction:  # pragma: no cover
-    """Extract predictions using an LLM.
+# ---------------------------------------------------------------------------
+# LLM extraction via Ollama (local inference)
+# ---------------------------------------------------------------------------
 
-    TODO: Implement using openai library:
-        import openai
-        client = openai.OpenAI(api_key=config.llm_api_key)
-        response = client.chat.completions.create(
-            model=config.llm_model,
-            response_format={"type": "json_object"},
-            messages=[{"role": "user", "content": _LLM_PROMPT.format(transcript=text[:8000])}],
-            max_tokens=config.get("llm", "max_tokens", default=2000),
-        )
-        raw = json.loads(response.choices[0].message.content)
-        return _parse_llm_response(raw, video_id, channel_id)
+
+def _extract_llm(text: str, video_id: str, channel_id: str) -> Prediction:  # pragma: no cover
+    """Extract predictions using a local Ollama model.
+
+    Requires Ollama to be running (``ollama serve``) and the model to be
+    available locally (e.g. ``ollama pull llama3.2``).
     """
-    raise NotImplementedError("LLM extraction not yet implemented.")
+    import ollama
+
+    client = ollama.Client(host=config.llm_base_url)
+    response = client.chat(
+        model=config.llm_model,
+        messages=[
+            {
+                "role": "user",
+                "content": _LLM_PROMPT.format(transcript=text[:8000]),
+            }
+        ],
+        format="json",
+        options={"num_predict": config.get("llm", "max_tokens", default=2000)},
+    )
+    raw = json.loads(response.message.content)
+    return _parse_llm_response(raw, video_id, channel_id)
 
 
 def _parse_llm_response(raw: dict, video_id: str, channel_id: str) -> Prediction:  # pragma: no cover
