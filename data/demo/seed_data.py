@@ -139,7 +139,7 @@ TEAMS = [
     Team(name="Argentina", confederation="CONMEBOL", fifa_ranking=1),
     Team(name="Germany", confederation="UEFA", fifa_ranking=16),
     Team(name="Spain", confederation="UEFA", fifa_ranking=8),
-    Team(name="England", confederation="UEFA", fifa_ranking=5),
+    Team(name="England", confederation="UEFA", fifa_ranking=6),
     Team(name="Portugal", confederation="UEFA", fifa_ranking=6),
     Team(name="Belgium", confederation="UEFA", fifa_ranking=4),
     Team(name="Netherlands", confederation="UEFA", fifa_ranking=7),

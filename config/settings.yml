@@ -12,7 +12,7 @@ database:
 youtube:
   api_key: ""  # Set via YOUTUBE_API_KEY environment variable
   max_results_per_channel: 50
-  published_after: "2025-01-01T00:00:00Z"  # Only fetch videos after this date
+  published_after: "2026-01-01T00:00:00Z"  # Only fetch videos after this date
 
 llm:
   enabled: false  # Enable LLM-based prediction extraction
