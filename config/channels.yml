@@ -1,0 +1,60 @@
+# Configuration des chaînes YouTube surveillées pour la Coupe du Monde 2026
+# Chaque chaîne peut avoir une liste de mots-clés spécifiques additionnels.
+
+channels:
+  - name: "LeFootballExpert"
+    channel_id: "UCxxxxxxxxxxxxxxxxxxxxxxx1"
+    url: "https://www.youtube.com/@LeFootballExpert"
+    language: "fr"
+    country: "FR"
+
+  - name: "WorldFootballAnalysis"
+    channel_id: "UCxxxxxxxxxxxxxxxxxxxxxxx2"
+    url: "https://www.youtube.com/@WorldFootballAnalysis"
+    language: "en"
+    country: "US"
+
+  - name: "FutbolMundial2026"
+    channel_id: "UCxxxxxxxxxxxxxxxxxxxxxxx3"
+    url: "https://www.youtube.com/@FutbolMundial2026"
+    language: "es"
+    country: "AR"
+
+  - name: "PronosticsFoot"
+    channel_id: "UCxxxxxxxxxxxxxxxxxxxxxxx4"
+    url: "https://www.youtube.com/@PronosticsFoot"
+    language: "fr"
+    country: "FR"
+
+  - name: "SoccerPredictions"
+    channel_id: "UCxxxxxxxxxxxxxxxxxxxxxxx5"
+    url: "https://www.youtube.com/@SoccerPredictions"
+    language: "en"
+    country: "GB"
+
+# Mots-clés globaux utilisés pour filtrer les vidéos liées à la Coupe du Monde 2026
+world_cup_keywords:
+  fr:
+    - "coupe du monde"
+    - "mondial 2026"
+    - "world cup 2026"
+    - "cm2026"
+    - "pronostic mondial"
+    - "prédiction coupe du monde"
+    - "qualifiés mondial"
+    - "finale mondial"
+  en:
+    - "world cup 2026"
+    - "wc2026"
+    - "fifa world cup"
+    - "world cup prediction"
+    - "world cup winner"
+    - "world cup qualifier"
+    - "group stage 2026"
+  es:
+    - "copa del mundo 2026"
+    - "mundial 2026"
+    - "pronostico mundial"
+    - "ganador mundial 2026"
+    - "clasificados mundial"
+    - "fase de grupos 2026"

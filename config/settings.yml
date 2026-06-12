@@ -1,0 +1,38 @@
+app:
+  name: "SatisGraph – World Cup 2026 Predictions"
+  version: "0.1.0"
+  debug: false
+
+database:
+  path: "data/satisgraph.db"
+  # future: switch to postgresql by changing the driver and connection_string below
+  # driver: "postgresql"
+  # connection_string: "******localhost:5432/satisgraph"
+
+youtube:
+  api_key: ""  # Set via YOUTUBE_API_KEY environment variable
+  max_results_per_channel: 50
+  published_after: "2025-01-01T00:00:00Z"  # Only fetch videos after this date
+
+llm:
+  enabled: false  # Enable LLM-based prediction extraction
+  provider: "openai"  # "openai" | "anthropic" | "local"
+  model: "gpt-4o-mini"
+  api_key: ""  # Set via OPENAI_API_KEY environment variable
+  max_tokens: 2000
+
+ingestion:
+  schedule_cron: "0 6 * * *"  # Daily at 6am (for future scheduling)
+  retry_attempts: 3
+  retry_delay_seconds: 5
+
+logging:
+  level: "INFO"
+  format: "json"  # "json" | "text"
+  file: "data/logs/satisgraph.log"
+
+dashboard:
+  host: "0.0.0.0"
+  port: 8501
+  page_title: "SatisGraph – WC2026 Predictions"
+  theme: "dark"

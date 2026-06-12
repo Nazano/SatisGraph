@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  dashboard:
+    build: .
+    container_name: satisgraph-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data          # persist DB and logs on host
+      - ./config:/app/config      # live-edit config without rebuild
+    environment:
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    restart: unless-stopped
+
+  # Uncomment to run the pipeline on a schedule (requires cron)
+  # pipeline:
+  #   build: .
+  #   container_name: satisgraph-pipeline
+  #   command: ["python", "-m", "app.pipeline"]
+  #   volumes:
+  #     - ./data:/app/data
+  #     - ./config:/app/config
+  #   environment:
+  #     - YOUTUBE_API_KEY=${YOUTUBE_API_KEY:-}
+  #     - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+  #   restart: "no"

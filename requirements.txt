@@ -1,0 +1,19 @@
+# Core
+pydantic>=2.0,<3.0
+pyyaml>=6.0
+
+# Dashboard
+streamlit>=1.35.0
+plotly>=5.22.0
+pandas>=2.2.0
+
+# YouTube ingestion (real API)
+# google-api-python-client>=2.130.0   # TODO: uncomment to enable real YouTube API calls
+# youtube-transcript-api>=0.6.2       # TODO: uncomment to enable real transcript fetching
+
+# LLM (optional)
+# openai>=1.30.0                       # TODO: uncomment + set OPENAI_API_KEY to enable LLM extraction
+
+# Dev / testing
+pytest>=8.0
+pytest-cov>=5.0
