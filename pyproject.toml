@@ -23,7 +23,7 @@ youtube = [
     "youtube-transcript-api>=0.6.2",
 ]
 llm = [
-    "openai>=1.30.0",
+    "ollama>=0.4.0",
 ]
 dev = [
     "pytest>=8.0",

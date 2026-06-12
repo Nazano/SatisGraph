@@ -96,17 +96,26 @@ python -m app.pipeline --predictions-only   # extract predictions
 
 ---
 
-## LLM-enhanced extraction (optional)
+## LLM-enhanced extraction (via Ollama)
 
-```bash
-export OPENAI_API_KEY="your_key_here"
-# In config/settings.yml, set:
-#   llm:
-#     enabled: true
+1. Install and start [Ollama](https://ollama.com):
+   ```bash
+   ollama serve
+   ollama pull llama3.2
+   ```
+2. In `config/settings.yml`, confirm:
+   ```yaml
+   llm:
+     enabled: true
+     model: "llama3.2"
+     base_url: "http://localhost:11434"
+   ```
+3. Run the pipeline:
+   ```bash
+   python -m app.pipeline --predictions-only
+   ```
 
-pip install openai
-python -m app.pipeline --predictions-only
-```
+Set `OLLAMA_BASE_URL` to override the default Ollama server address.
 
 ---
 
@@ -171,7 +180,7 @@ pip install fastapi uvicorn
 | Variable | Purpose |
 |----------|---------|
 | `YOUTUBE_API_KEY` | YouTube Data API v3 key |
-| `OPENAI_API_KEY` | OpenAI key for LLM extraction |
+| `OLLAMA_BASE_URL` | Ollama server URL for LLM extraction (default: `http://localhost:11434`) |
 
 ---
 
@@ -179,7 +188,7 @@ pip install fastapi uvicorn
 
 - [ ] Real YouTube API integration (`app/ingestion/youtube_client.py`)
 - [ ] Real transcript fetching (`app/extraction/transcript.py`)
-- [ ] LLM extraction layer (`app/extraction/predictions.py::_extract_llm`)
+- [x] LLM extraction layer (`app/extraction/predictions.py`) — implemented via Ollama
 - [ ] FastAPI REST endpoints (`app/api/`)
 - [ ] Scheduled pipeline (Airflow / cron / APScheduler)
 - [ ] PostgreSQL migration path
